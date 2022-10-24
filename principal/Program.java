@@ -3,6 +3,7 @@ package principal;
 import java.util.Scanner;
 
 import entities.entities.Account;
+import exception.DomainException;
 
 public class Program {
     
@@ -24,10 +25,16 @@ public class Program {
 
         Account account = new Account(number, holder, balance, withdrawLimit);
 
-        System.out.print("\nEnter amount for withdraw: ");
-        account.withdraw(sc.nextDouble());
-        System.out.println("New balance: " + account.getBalance());
+        try {
+            System.out.print("\nEnter amount for withdraw: ");
+            account.withdraw(sc.nextDouble());
+            System.out.println("New balance: " + account.getBalance());
+        }
+        catch (DomainException e) {
+            System.out.println(e.getMessage());
+        }
 
+        sc.close();
 
     }
 

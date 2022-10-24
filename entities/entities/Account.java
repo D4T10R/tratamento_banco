@@ -56,20 +56,22 @@ public class Account {
     // ENCAPSULAMENTO
 
     // METODOS
-    
     public void deposit(double amount) {
         this.balance += amount;
     }
 
     public void withdraw(Double amount) {
-        if (amount > getWithdrawLimit()) {
-            throw new DomainException("The amount exceeds withdraw limit");
-        }
-        else if (amount > getBalance()) {
-            throw new DomainException("Not enough balance");
-        }
+        validateWithdraw(amount);
         this.balance -= amount;
-        
+    }
+
+    public void validateWithdraw(Double amount) {
+        if (amount > getWithdrawLimit()) {
+            throw new DomainException("Erro de saque: A quantia excede o limite de saque");
+        }
+        if (amount > getBalance()) {
+            throw new DomainException("Erro de saque: Saldo insuficiente");
+        }
     }
     // METODOS
     
