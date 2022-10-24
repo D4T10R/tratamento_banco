@@ -1,3 +1,8 @@
+
+package entities.entities;
+
+import exception.DomainException;
+
 public class Account {
 
     // ATRIBUTOS
@@ -51,13 +56,23 @@ public class Account {
     // ENCAPSULAMENTO
 
     // METODOS
+    
     public void deposit(double amount) {
         this.balance += amount;
     }
 
     public void withdraw(Double amount) {
+        if (amount > getWithdrawLimit()) {
+            throw new DomainException("The amount exceeds withdraw limit");
+        }
+        else if (amount > getBalance()) {
+            throw new DomainException("Not enough balance");
+        }
         this.balance -= amount;
+        
     }
+    // METODOS
+    
 
 
 }
